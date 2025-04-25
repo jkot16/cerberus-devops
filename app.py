@@ -40,6 +40,12 @@ def status():
                 animation: pulse 2s infinite;
                 margin-bottom: 20px;
             }}
+            h1 {{
+                margin-bottom: 20px;
+                font-size: 1.8em;
+                color: #fff;
+                text-shadow: 0 0 10px #ff6a00;
+            }}
             pre {{
                 background: #1e1e1e;
                 padding: 1em;
