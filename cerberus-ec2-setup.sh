@@ -16,6 +16,8 @@ fi
 
 cd cerberus-devops || { echo "Cerberus directory not found"; exit 1; }
 
+chmod +x /home/ubuntu/cerberus-devops/cerberus-healthcheck.sh
+
 echo "Building the Docker image..."
 docker build -t cerberus-app .
 
