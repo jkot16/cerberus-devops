@@ -8,7 +8,7 @@ sudo apt install -y docker.io git
 
 echo "Adding the user to the Docker group..."
 sudo usermod -aG docker $USER
-newgrp docker
+
 
 echo "Cloning the Cerberus repository..."
 if [ ! -d "cerberus-devops" ]; then
