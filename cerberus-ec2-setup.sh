@@ -24,6 +24,9 @@ echo "🛑 Stopping any existing Cerberus container..."
 docker stop cerberus 2>/dev/null || true
 docker rm cerberus 2>/dev/null || true
 
+rm -rf /home/ubuntu/cerberus-devops/cerberus.log
+touch /home/ubuntu/cerberus-devops/cerberus.log
+
 echo "Starting the Cerberus container..."
 docker run -d -p 80:5000 \
   -v /home/ubuntu/cerberus-devops/cerberus.log:/app/cerberus.log \
