@@ -9,7 +9,6 @@ sudo apt install -y docker.io git
 echo "Adding the user to the Docker group..."
 sudo usermod -aG docker $USER
 
-
 echo "Cloning the Cerberus repository..."
 if [ ! -d "cerberus-devops" ]; then
   git clone https://github.com/jkot16/cerberus-devops.git
@@ -24,6 +23,7 @@ echo "🛑 Stopping any existing Cerberus container..."
 docker stop cerberus 2>/dev/null || true
 docker rm cerberus 2>/dev/null || true
 
+echo "Preparing log file..."
 rm -rf /home/ubuntu/cerberus-devops/cerberus.log
 touch /home/ubuntu/cerberus-devops/cerberus.log
 
@@ -34,4 +34,10 @@ docker run -d -p 80:5000 \
   --restart always \
   cerberus-app
 
-echo "Cerberus is now running on port 80!"
+echo "Please enter your Discord webhook URL:"
+read -p "Webhook URL: " WEBHOOK_URL
+
+echo "Setting up Cerberus watchdog cronjob..."
+(crontab -l 2>/dev/null; echo "* * * * * CERBERUS_WEBHOOK_URL=\"$WEBHOOK_URL\" /home/ubuntu/cerberus-devops/cerberus-healthcheck.sh") | crontab -
+
+echo "✅ Setup complete! Cerberus is running on port 80."
