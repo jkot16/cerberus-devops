@@ -58,7 +58,7 @@ def status():
     </head>
     <body>
         <img src="/static/cerberus-logo.png" alt="Cerberus Logo" />
-        <h1>Status Logs</h1>
+        <h1>Status logs</h1>
         <pre>{''.join(logs)}</pre>
     </body>
     </html>
