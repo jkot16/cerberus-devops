@@ -2,7 +2,9 @@ from flask import Flask, jsonify, render_template_string
 import os
 
 app = Flask(__name__)
-LOG_FILE = "cerberus.log"
+
+LOG_FILE = "/app/cerberus.log"
+
 
 @app.route('/')
 def home():
