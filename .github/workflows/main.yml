@@ -24,7 +24,7 @@ jobs:
 
       - name: Run tests
         run: |
-          echo "TODO: pytest will be here"
+          pytest test_app.py
 
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v0.1.7
