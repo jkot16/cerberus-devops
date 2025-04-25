@@ -38,6 +38,11 @@ echo "Please enter your Discord webhook URL:"
 read -p "Webhook URL: " WEBHOOK_URL
 
 echo "Setting up Cerberus watchdog cronjob..."
-(crontab -l 2>/dev/null; echo "* * * * * CERBERUS_WEBHOOK_URL=\"$WEBHOOK_URL\" /home/ubuntu/cerberus-devops/cerberus-healthcheck.sh") | crontab -
+if ! crontab -l 2>/dev/null | grep -q "cerberus-healthcheck.sh"; then
+  (crontab -l 2>/dev/null; echo "* * * * * CERBERUS_WEBHOOK_URL=\"$WEBHOOK_URL\" /home/ubuntu/cerberus-devops/cerberus-healthcheck.sh") | crontab -
+  echo "✅ Cronjob added!"
+else
+  echo "ℹ️ Cronjob already exists. Skipping..."
+fi
 
 echo "✅ Setup complete! Cerberus is running on port 80."
