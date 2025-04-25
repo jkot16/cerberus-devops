@@ -8,6 +8,7 @@ sudo apt install -y docker.io git
 
 echo "Adding the user to the Docker group..."
 sudo usermod -aG docker $USER
+newgrp docker
 
 echo "Cloning the Cerberus repository..."
 if [ ! -d "cerberus-devops" ]; then
@@ -24,6 +25,10 @@ docker stop cerberus 2>/dev/null || true
 docker rm cerberus 2>/dev/null || true
 
 echo "Starting the Cerberus container..."
-docker run -d -p 80:5000 --name cerberus --restart always cerberus-app
+docker run -d -p 80:5000 \
+  -v /home/ubuntu/cerberus-devops/cerberus.log:/app/cerberus.log \
+  --name cerberus \
+  --restart always \
+  cerberus-app
 
 echo "Cerberus is now running on port 80!"
