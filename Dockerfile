@@ -1,8 +1,9 @@
 FROM python:3.11-slim
 
 # Install cron
-RUN apt-get update && apt-get install -y --no-install-recommends cron \
+RUN apt-get update && apt-get install -y --no-install-recommends cron curl \
     && rm -rf /var/lib/apt/lists/*
+
 
 WORKDIR /app
 
