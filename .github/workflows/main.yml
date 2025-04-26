@@ -101,14 +101,6 @@ jobs:
           trivy image --exit-code 0 --ignore-unfixed --severity CRITICAL,HIGH ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.TAG }}
 
       # 9. Deploy to EC2 via SSH
-      - name: Wait for EC2 SSH
-        uses: rohithnair01/wait-for-ssh-action@v1
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          port: 22
-          privateKey: ${{ secrets.EC2_SSH_KEY }}
-
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v0.1.7
         with:
