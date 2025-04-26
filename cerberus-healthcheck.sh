@@ -2,11 +2,11 @@
 
 # cerberus-healthcheck.sh – Health Check and Monitoring for Cerberus
 
-LOG_FILE="/home/ubuntu/cerberus-devops/cerberus.log"
+LOG_FILE="/app/cerberus.log"
 
-# Check if webhook is set
+# Check if the webhook URL is set
 if [ -z "$CERBERUS_WEBHOOK_URL" ]; then
-    echo "Webhook URL not set. Aborting."
+    echo "Webhook URL is not set. Aborting."
     exit 1
 fi
 

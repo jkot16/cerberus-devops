@@ -6,35 +6,85 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  build-test-scan-push-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      # Checkout the repository
+      - name: Checkout repository
         uses: actions/checkout@v3
 
+      # Set up Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
 
-      - name: Install dependencies
+      # Cache pip packages
+      - name: Cache pip dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      # Install dependencies
+      - name: Install Python dependencies
         run: |
           pip install -r requirements.txt
 
+      # Run tests
       - name: Run tests
         run: |
           pytest test_app.py
 
-      - name: Deploy to EC2
+      # Log in to Docker Hub
+      - name: Log in to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # Cache Docker layers
+      - name: Cache Docker layers
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-docker-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-docker-
+
+      # Build Docker image
+      - name: Build Docker image
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/cerberus-app:latest .
+
+      # Scan Docker image with Trivy
+      - name: Scan Docker image with Trivy
+        uses: aquasecurity/trivy-action@v0.11.2
+        with:
+          image-ref: ${{ secrets.DOCKERHUB_USERNAME }}/cerberus-app:latest
+          format: table
+          exit-code: 1
+          ignore-unfixed: true
+          vuln-type: os,library
+
+      # Push Docker image to Docker Hub
+      - name: Push Docker image to DockerHub
+        run: |
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/cerberus-app:latest
+
+      # Deploy on EC2
+      - name: Deploy to EC2 instance
         uses: appleboy/ssh-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd cerberus
-            git pull
-            docker build -t cerberus-app .
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/cerberus-app:latest
             docker stop cerberus || true && docker rm cerberus || true
-            docker run -d -p 80:5000 --name cerberus --restart always cerberus-app
+            docker run -d -p 80:5000 --name cerberus --restart always \
+              -e CERBERUS_WEBHOOK_URL=${{ secrets.CERBERUS_WEBHOOK_URL }} \
+              ${{ secrets.DOCKERHUB_USERNAME }}/cerberus-app:latest
