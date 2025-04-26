@@ -1,9 +1,11 @@
 FROM python:3.11-slim
 
-# Install cron
-RUN apt-get update && apt-get install -y --no-install-recommends cron curl \
+# Install cron, curl, and procps for ps/kill commands
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    cron \
+    curl \
+    procps \
     && rm -rf /var/lib/apt/lists/*
-
 
 WORKDIR /app
 
