@@ -8,7 +8,7 @@ if [ -z "$CERBERUS_WEBHOOK_URL" ]; then
     exit 1
 fi
 
-RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost/ping)
+RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:5000/ping)
 TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
 
 # Determine status and embed color
