@@ -88,14 +88,17 @@ jobs:
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
-      # 8. Security scan with Trivy
-      - name: Scan Docker image with Trivy
-        uses: aquasecurity/trivy-action@v0.10.1
-        with:
-          image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.TAG }}
-          exit-code: 0
-          severity: CRITICAL,HIGH
-          ignore-unfixed: true
+      # 8. Manual install & run Trivy
+      - name: Install Trivy manually
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget
+          wget https://github.com/aquasecurity/trivy/releases/download/v0.61.1/trivy_0.61.1_Linux-64bit.deb
+          sudo dpkg -i trivy_0.61.1_Linux-64bit.deb
+
+      - name: Scan Docker image with Trivy manually
+        run: |
+          trivy image --exit-code 0 --ignore-unfixed --severity CRITICAL,HIGH ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.TAG }}
 
       # 9. Deploy to EC2 via SSH
       - name: Wait for EC2 SSH
