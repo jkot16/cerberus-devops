@@ -2,8 +2,6 @@
 
 # cerberus-healthcheck.sh – Health Check and Monitoring for Cerberus
 
-LOG_FILE="/app/cerberus.log"
-
 # Check if the webhook URL is set
 if [ -z "$CERBERUS_WEBHOOK_URL" ]; then
     echo "Webhook URL is not set. Aborting."
@@ -22,8 +20,8 @@ else
     STATUS_TEXT="Cerberus is missing from his post! ❌ Status: $RESPONSE"
 fi
 
-# Log to file
-echo "[$TIMESTAMP] $STATUS_TEXT" >> "$LOG_FILE"
+# Log to file - UWAGA: bez zmiennej, pełna ścieżka
+echo "[$TIMESTAMP] $STATUS_TEXT" >> /app/cerberus.log
 
 # Build Discord embed JSON
 JSON=$(cat <<EOF
