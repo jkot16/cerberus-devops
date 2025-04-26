@@ -1,1 +1,1 @@
-* * * * * /bin/bash /app/cerberus-healthcheck.sh >> /app/cron.log 2>&1
+* * * * * CERBERUS_WEBHOOK_URL=${CERBERUS_WEBHOOK_URL} /bin/bash /app/cerberus-healthcheck.sh >> /app/cron.log 2>&1
