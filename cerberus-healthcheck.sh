@@ -9,7 +9,10 @@ if [ -z "$CERBERUS_WEBHOOK_URL" ]; then
 fi
 
 RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:5000/ping)
-TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
+
+# Download Warsaw, Poland timestamp
+TIMESTAMP=$(TZ="Europe/Warsaw" date '+%Y-%m-%d %H:%M:%S')
+
 
 # Determine status and embed color
 if [ "$RESPONSE" == "200" ]; then
