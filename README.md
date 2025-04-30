@@ -16,7 +16,7 @@
 4. [📦 Installation & Usage](#4-installation--usage)  
 5. [🧪 Running Tests](#5-running-tests)  
 6. [🔄 CI/CD Workflow](#6-cicd-workflow)  
-7. [📈 Monitoring & Alerts](#7-monitoring-alerts)  
+7. [📈 Monitoring & Alerts](#7-monitoring--alerts)  
 8. [🛡️ Security](#8-security)  
 9. [🗺️ Roadmap](#9-roadmap)
 
