@@ -45,8 +45,9 @@
 ## 3. Tech Stack
 
 - **Backend:** Python 3.11, Flask  
-- **Container:** Docker with in-container cron  
-- **Scripting:** Bash  
+- **Container:** Docker 
+- **Scripting:** Bash
+- **Scheduling:** Cron job for periodic health checks 
 - **CI/CD:** GitHub Actions (pytest, Trivy, build & push, EC2 deploy)  
 - **Hosting:** AWS EC2, Docker Hub  
 - **Notifications:** Discord Webhooks  
@@ -93,8 +94,8 @@ Defined in .github/workflows/main.yml, the pipeline runs on every push to main:
 ## 7. Monitoring & Alerts
 
 Cron runs **cerberus-healthcheck.sh** every minute.
-The full health-check script lives in [`scripts/cerberus-healthcheck.sh`](./cerberus-healthcheck.sh)
-Here’s the core logic:
+The full health-check script lives in [`scripts/cerberus-healthcheck.sh`](./cerberus-healthcheck.sh),
+here’s the core logic:
 
 ```bash
 RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:5000/ping)
@@ -121,10 +122,7 @@ curl -s -H "Content-Type: application/json" \
 ---
 
 ## 9. Roadmap
-- ✅ Implement discord alerts
-- 🟧 Infrastructure as Code (Terraform for AWS provisioning)
-- 🟧 HTTPS support with automatic TLS (Let’s Encrypt)
-- 🟧 Prometheus metrics endpoint for external monitoring
-- 🟧 Docker Compose setup for easy local multi-container testing
+For more upcoming features and tracked improvements, see:  
+👉 [GitHub Issues for Cerberus](https://github.com/jkot16/cerberus-devops/issues)
 
 ---
