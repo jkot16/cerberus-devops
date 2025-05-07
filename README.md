@@ -11,7 +11,7 @@
 ## Table of Contents
 
 1. [🔎 Project Overview](#1--project-overview)  
-2. [🛠️ Features](#2--features)  
+2. [🛠️ Features](#features)  
 3. [⚙️ Tech Stack](#3--tech-stack)  
 4. [📦 Installation & Usage](#4--installation--usage)  
 5. [🧪 Running Tests](#5--running-tests)  
