@@ -10,27 +10,27 @@
 
 ## Table of Contents
 
-1. [🔎 Project Overview](#1--project-overview)  
-2. [🛠️ Features](#features)  
-3. [⚙️ Tech Stack](#3--tech-stack)  
-4. [📦 Installation & Usage](#4--installation--usage)  
-5. [🧪 Running Tests](#5--running-tests)  
-6. [🔄 CI/CD Workflow](#6--cicd-workflow)  
-7. [📈 Monitoring & Alerts](#7--monitoring--alerts)  
-8. [🛡️ Security](#8--security)  
-9. [🗺️ Roadmap](#9--roadmap)  
+1. [🔎 Project Overview](#1-project-overview)  
+2. [🛠️ Features](#2-features)  
+3. [⚙️ Tech Stack](#3-tech-stack)  
+4. [📦 Installation & Usage](#4-installation--usage)  
+5. [🧪 Running Tests](#5-running-tests)  
+6. [🔄 CI/CD Workflow](#6-cicd-workflow)  
+7. [📈 Monitoring & Alerts](#7-monitoring--alerts)  
+8. [🛡️ Security](#8-security)  
+9. [🗺️ Roadmap](#9-roadmap)
 
 
 ---
 
-## 1. 🔎 Project Overview
+## 1. Project Overview
 
 **Cerberus** is a lightweight Flask application containerized with Docker that self-monitors its `/ping` endpoint every minute, logs each result, sends green (OK) or red (FAIL) alerts to Discord, and provides a web dashboard showing the last ten checks. It also includes a GitHub Actions pipeline to run tests, perform Trivy security scans, build and push the Docker image, and deploy automatically to AWS EC2.
 
 🔗 **Live Demo**: [Cerberus Status Dashboard](http://44.202.218.44/status)
 ---
 
-## 2. 🛠️ Features
+## 2. Features
 
 - **Endpoints**:  
   - `/` – “Hello from Cerberus”  
@@ -43,7 +43,7 @@
 
 ---
 
-## 3. ⚙️ Tech Stack
+## 3. Tech Stack
 
 - **Backend:** Python 3.11, Flask  
 - **Container:** Docker 
@@ -55,7 +55,7 @@
 
 ---
 
-## 4. 📦 Installation & Usage
+## 4. Installation & Usage
 
 ```bash
 git clone https://github.com/jkot16/cerberus-devops.git
@@ -74,7 +74,7 @@ docker run -d \
 
 ---
 
-## 5. 🧪 Running Tests
+## 5. Running Tests
 Run the test suite locally before pushing:
 ```python
 pytest test_app.py
@@ -82,7 +82,7 @@ pytest test_app.py
 
 ---
 
-## 6. 🔄 CI/CD Workflow
+## 6. CI/CD Workflow
 Defined in .github/workflows/main.yml, the pipeline runs on every push to main:
 - Checkout & setup Python 3.11 + cache pip
 - Run pytest
@@ -92,7 +92,7 @@ Defined in .github/workflows/main.yml, the pipeline runs on every push to main:
 
 ---
 
-## 7. 📈 Monitoring & Alerts
+## 7. Monitoring & Alerts
 
 Cron runs **cerberus-healthcheck.sh** every minute.
 The full health-check script lives in [`scripts/cerberus-healthcheck.sh`](./cerberus-healthcheck.sh),
@@ -114,7 +114,7 @@ curl -s -H "Content-Type: application/json" \
 
 ---
 
-## 8. 🛡️ Security
+## 8. Security
 - Secrets managed via environment variables & GitHub Secrets
 - Automated Trivy scans on every push to catch vulnerabilities
 - Fail-fast CI: pipeline stops if tests or security checks fail
@@ -122,7 +122,7 @@ curl -s -H "Content-Type: application/json" \
 
 ---
 
-## 9. 🗺️ Roadmap
+## 9. Roadmap
 For more upcoming features and tracked improvements, see:  
 👉 [GitHub Issues for Cerberus](https://github.com/jkot16/cerberus-devops/issues)
 
