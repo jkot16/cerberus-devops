@@ -10,15 +10,15 @@
 
 ## Table of Contents
 
-1. [🔎 Project Overview](#1-project-overview)  
-2. [🛠️ Features](#2-features)  
-3. [⚙️ Tech Stack](#3-tech-stack)  
-4. [📦 Installation & Usage](#4-installation--usage)  
-5. [🧪 Running Tests](#5-running-tests)  
-6. [🔄 CI/CD Workflow](#6-cicd-workflow)  
-7. [📈 Monitoring & Alerts](#7-monitoring--alerts)  
-8. [🛡️ Security](#8-security)  
-9. [🗺️ Roadmap](#9-roadmap)
+1. [🔎 Project Overview](#project-overview)  
+2. [🛠️ Features](#features)  
+3. [⚙️ Tech Stack](#tech-stack)  
+4. [📦 Installation & Usage](#installation--usage)  
+5. [🧪 Running Tests](#running-tests)  
+6. [🔄 CI/CD Workflow](#cicd-workflow)  
+7. [📈 Monitoring & Alerts](#monitoring--alerts)  
+8. [🛡️ Security](#security)  
+9. [🗺️ Roadmap](#roadmap)
 
 ---
 
