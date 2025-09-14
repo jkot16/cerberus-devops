@@ -28,8 +28,9 @@
 **Cerberus** is a lightweight Flask application containerized with Docker that self-monitors its `/ping` endpoint every minute, logs each result, sends green (OK) or red (FAIL) alerts to Discord, and provides a web dashboard showing the last ten checks. It also includes a GitHub Actions pipeline to run tests, perform Trivy security scans, build and push the Docker image, and deploy automatically to AWS EC2.
 
 ---
-
 ## 2. Features
+
+
 
 - **Endpoints**:  
   - `/` – “Hello from Cerberus”  
