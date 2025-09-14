@@ -31,7 +31,6 @@
 ## 2. Features
 
 
-
 - **Endpoints**:  
   - `/` – “Hello from Cerberus”  
   - `/ping` – health check returns `{ "status": "ok" }`  
